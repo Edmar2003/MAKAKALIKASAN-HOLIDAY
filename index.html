@@ -3,364 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAKAKALIKASAN - Winter Seasons</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❄️</text></svg>">
+    <title>Site Temporarily Unavailable</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: white;
+            min-height: 100vh;
+            overflow: hidden;
+            background: #000;
+        }
+        
+        #space-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px rgba(66, 220, 255, 0.7);
+            color: #ffffff;
+            animation: pulse 3s infinite alternate;
+        }
+        
+        .apology {
+            font-size: 1.8rem;
+            max-width: 800px;
+            line-height: 1.6;
+            margin-bottom: 3rem;
+            background-color: rgba(0, 20, 40, 0.7);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(100, 180, 255, 0.3);
+            box-shadow: 0 0 25px rgba(100, 180, 255, 0.2);
+        }
+        
+        .contact-info {
+            font-size: 1.3rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .status {
+            display: inline-block;
+            background-color: rgba(255, 50, 50, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            border: 1px solid rgba(255, 100, 100, 0.5);
+        }
+        
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+        }
+        
+        @keyframes pulse {
+            0% {
+                text-shadow: 0 0 15px rgba(66, 220, 255, 0.7);
+            }
+            100% {
+                text-shadow: 0 0 25px rgba(66, 220, 255, 1), 0 0 35px rgba(66, 150, 255, 0.8);
+            }
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .apology {
+                font-size: 1.4rem;
+                padding: 1.5rem;
+            }
+            
+            .contact-info {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .apology {
+                font-size: 1.2rem;
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-
+    <div id="space-bg"></div>
+    <div class="stars" id="stars-container"></div>
     
-
-    <!-- Welcome Modal -->
-    <div id="welcomeModal" class="modal">
-        <div class="modal-content winter-gate">
-            <div class="modal-header">
-                <h2><i class="fas fa-snowflake"></i> Winter Gate <i class="fas fa-snowflake"></i></h2>
-                <p class="modal-subtitle">Enter your name to join our winter gathering</p>
-            </div>
-            <div class="modal-body">
-                <div class="input-container">
-                    <input type="text" id="userName" placeholder="Enter your full name">
-                    <button id="submitName"><i class="fas fa-star"></i> Enter</button>
-                </div>
-                <div class="user-type-options">
-                    <p>Select your role:</p>
-                    <div class="options">
-                        <button class="user-type-btn active" data-type="student">Student</button>
-                        <button class="user-type-btn" data-type="teacher">Teacher</button>
-                        <button class="user-type-btn" data-type="visitor">Visitor</button>
-                    </div>
-                </div>
-                <div class="welcome-message hidden" id="personalizedWelcome">
-                    <div class="welcome-content">
-                        <div class="star-animation">
-                            <i class="fas fa-star twinkle-star"></i>
-                        </div>
-                        <h3 id="welcomeText"></h3>
-                        <div class="user-photo-placeholder">
-                            <i class="fas fa-user-circle"></i>
-                        </div>
-                    </div>
-                    <button id="enterSite">Continue to Site <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
+    <div class="container">
+        <h1>Website Temporarily Down</h1>
+        
+        <div class="apology">
+            <p>We sincerely apologize for the inconvenience. The website is currently undergoing maintenance to improve your experience.</p>
+            <p>I am working diligently to restore this as quickly as possible. Thank you for your patience and understanding.</p>
+            
+            <div class="status">Expected to be back online in a few days</div>
         </div>
+        
     </div>
 
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <span class="logo-text">MAKAKALIKASAN</span>
-                <div class="nav-aurora"></div>
-            </div>
-            <div class="nav-links">
-                <a href="#hero" class="nav-link active"><i class="fas fa-home"></i> Home</a>
-                <a href="#journey" class="nav-link"><i class="fas fa-lantern"></i> Journey</a>
-                <a href="#classmates" class="nav-link"><i class="fas fa-users"></i> Classmates</a>
-                <a href="#gallery" class="nav-link"><i class="fas fa-images"></i> Gallery</a>
-                <div class="gender-indicator">
-                    <button id="genderToggle" class="gender-btn" title="Toggle gender indicator">
-                        <i class="fas fa-mars"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="nav-controls">
-                <button id="themeToggle" class="control-btn" title="Toggle theme">
-                    <i class="fas fa-snowflake"></i>
-                </button>
-                <button id="animationToggle" class="control-btn" title="Toggle animations">
-                    <i class="fas fa-running"></i>
-                </button>
-                <button id="snowToggle" class="control-btn" title="Toggle snowfall">
-                    <i class="fas fa-wind"></i>
-                </button>
-                <button id="musicToggle" class="control-btn" title="Toggle music">
-                    <i class="fas fa-music"></i>
-                </button>
-                <button id="printBtn" class="control-btn" title="Print mode">
-                    <i class="fas fa-print"></i>
-                </button>
-            </div>
-            <button class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="hero" class="hero-section">
-        <div class="snow-background" id="snowContainer"></div>
-        <div class="night-snow-container" id="nightSnowContainer"></div>
-        <div class="hero-content">
-            <div class="hero-title-container">
-                <h1 class="hero-title">
-                    <span class="title-main">MAKAKALIKASAN</span>
-                    <span class="title-sub">Winter Lights Welcome</span>
-                </h1>
-                <div class="snowflake-shadow"></div>
-            </div>
+    <script>
+        function createSpaceBackground() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const container = document.getElementById('space-bg');
             
-            <div class="hero-main">
-                <div class="class-picture-container">
-                    <div class="frosted-frame">
-                        <img src="ChristmasSpecial/IMG20250414230505.jpg" alt="Class Picture" class="class-picture">
-                        <div class="frost-overlay"></div>
-                    </div>
-                    <button class="full-view-btn">View Full Image <i class="fas fa-expand"></i></button>
-                </div>
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            container.appendChild(canvas);
+            
+            const stars = [];
+            const starCount = 500;
+            
+            for (let i = 0; i < starCount; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 1.5,
+                    opacity: Math.random() * 0.8 + 0.2,
+                    speed: Math.random() * 0.5
+                });
+            }
+            
+            const nebulae = [];
+            const nebulaCount = 4;
+            
+            for (let i = 0; i < nebulaCount; i++) {
+                nebulae.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 300 + 100,
+                    color: i === 0 ? 'rgba(94, 23, 235, 0.15)' : 
+                           i === 1 ? 'rgba(235, 64, 52, 0.1)' : 
+                           i === 2 ? 'rgba(52, 152, 235, 0.1)' : 'rgba(235, 152, 52, 0.1)',
+                    speedX: Math.random() * 0.2 - 0.1,
+                    speedY: Math.random() * 0.2 - 0.1
+                });
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
                 
-                <div class="days-counter">
-                    <div class="counter-title">
-                        <i class="fas fa-calendar-alt"></i>
-                        <h3>GRADUATED</h3>
-                    </div>
-                    <div class="counter-number" id="daysCounter">0</div>
-                    <span class="days-label">days ago</span>
-                    <div class="snowflake-animation" id="snowflakeCounter">
-                    </div>
-                    <p class="counter-date">Graduate: <span id="startDate">April 15, 2025</span></p>
-                </div>
-            </div>
+                nebulae.forEach(nebula => {
+                    const gradient = ctx.createRadialGradient(
+                        nebula.x, nebula.y, 0,
+                        nebula.x, nebula.y, nebula.radius
+                    );
+                    
+                    gradient.addColorStop(0, nebula.color);
+                    gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+                    
+                    ctx.fillStyle = gradient;
+                    ctx.beginPath();
+                    ctx.arc(nebula.x, nebula.y, nebula.radius, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    nebula.x += nebula.speedX;
+                    nebula.y += nebula.speedY;
+                    
+                    if (nebula.x > canvas.width + nebula.radius) nebula.x = -nebula.radius;
+                    if (nebula.x < -nebula.radius) nebula.x = canvas.width + nebula.radius;
+                    if (nebula.y > canvas.height + nebula.radius) nebula.y = -nebula.radius;
+                    if (nebula.y < -nebula.radius) nebula.y = canvas.height + nebula.radius;
+                });
+                
+                stars.forEach(star => {
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
+                    ctx.fill();
+                    
+                    star.x -= star.speed;
+                    if (star.x < 0) star.x = canvas.width;
+                    
+                    star.opacity += (Math.random() - 0.5) * 0.05;
+                    star.opacity = Math.max(0.2, Math.min(1, star.opacity));
+                });
+                
+                requestAnimationFrame(animate);
+            }
             
-            <div class="seasonal-greeting">
-                <h3><i class="fas fa-heart"></i> Season's Greetings & Warm Winter Wishes</h3>
-            </div>
-        </div>
-        
-        <div class="scroll-indicator">
-            <i class="fas fa-chevron-down"></i>
-        </div>
-    </section>
-
-    <!-- Journey Section -->
-    <section id="journey" class="journey-section">
-        <div class="section-header">
-            <h2><i class="fas fa-lantern"></i> Our Glowing Memories</h2>
-            <p class="section-subtitle">Memory Lanterns</p>
-        </div>
-        
-        <div class="lantern-carousel">
-            <div class="carousel-container">
-                <div class="lantern-track" id="lanternTrack">
-                </div>
-            </div>
+            animate();
             
-            <button class="carousel-nav prev" id="prevLantern">
-                <i class="fas fa-star"></i>
-            </button>
-            <button class="carousel-nav next" id="nextLantern">
-                <i class="fas fa-star"></i>
-            </button>
-        </div>
+            window.addEventListener('resize', function() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
         
-        <div class="lantern-indicators" id="lanternIndicators">
-        </div>
-    </section>
-
-    <!-- Classmates Section -->
-    <section id="classmates" class="classmates-section">
-        <div class="section-header">
-            <h2><i class="fas fa-users"></i> Starlight Directory</h2>
-            <p class="section-subtitle">Our Guiding Stars</p>
-        </div>
-        
-        <!-- Adviser Section -->
-        <div class="adviser-section">
-            <h3><i class="fas fa-star"></i> Our Guiding Star</h3>
-            <div class="adviser-card">
-                <div class="adviser-photo">
-                    <div class="star-border"></div>
-                    <i class="fas fa-user-tie"></i>
-                </div>
-                <div class="adviser-info">
-                    <h4>Sir Flor</h4>
-                    <p class="adviser-title">Our Adviser</p>
-                    <p class="adviser-quote">"Guiding us through the seasons of learning"</p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Gender Tabs -->
-        <div class="gender-tabs">
-            <button class="gender-tab active" data-gender="boys">
-                <i class="fas fa-mars"></i> Boys
-            </button>
-            <button class="gender-tab" data-gender="girls">
-                <i class="fas fa-venus"></i> Girls
-            </button>
-            <button class="gender-tab" data-gender="teachers">
-                <i class="fas fa-chalkboard-teacher"></i> Teachers
-            </button>
-        </div>
-        
-        <!-- Boys Grid -->
-        <div class="classmates-grid boys-grid active">
-            <h3 class="grid-title"><i class="fas fa-snowflake"></i> Boys </h3>
-            <div class="classmates-container" id="boysContainer">
-            </div>
-        </div>
-        
-        <!-- Girls Grid -->
-        <div class="classmates-grid girls-grid">
-            <h3 class="grid-title"><i class="fas fa-star"></i> Girls </h3>
-            <div class="classmates-container" id="girlsContainer">
-            </div>
-        </div>
-        
-        <!-- Teachers Grid -->
-        <div class="classmates-grid teachers-grid">
-            <h3 class="grid-title"><i class="fas fa-book-open"></i> Teachers </h3>
-            <div class="classmates-container" id="teachersContainer">
-            </div>
-        </div>
-        
-        <!-- Departed Classmates Memorial -->
-        <div class="memorial-section">
-            <h3><i class="fas fa-star-of-life"></i> Always Remembered</h3>
-            <div class="constellation"></div>
-            <p class="memorial-text">In loving memory of those who are always in our hearts</p>
-            <div class="rising-stars" id="risingStars">
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section id="gallery" class="gallery-section">
-        <div class="section-header">
-            <h2><i class="fas fa-images"></i> Frozen Moments</h2>
-            <p class="section-subtitle">Captured Memories in Frames</p>
-        </div>
-        
-        <div class="gallery-controls">
-            <button class="filter-btn" data-filter="Grade 11">Grade 11</button>
-            <button class="filter-btn" data-filter="Teachers Day">Teachers Day</button>
-            <button class="filter-btn" data-filter="Cantata">Cantata</button>
-            <button class="filter-btn" data-filter="Year End Party">Year End Party</button>
-            <button class="filter-btn" data-filter="Grade 12">Grade 12</button>
-            <button class="filter-btn" data-filter="MBC">MBC</button>
-            <button class="filter-btn" data-filter="Rehearsal">Rehearsal</button>
-            <button class="filter-btn" data-filter="Intercultural">Intercultural</button>
-            <button class="filter-btn" data-filter="Graduation">Graduation</button>
-            <button class="filter-btn" data-filter="Others">Others</button>
-            <button id="winterViewToggle" class="winter-view-btn">
-                <i class="fas fa-snowflake"></i> Winter View
-            </button>
-        </div>
-        
-        <div class="masonry-grid" id="masonryGrid">
-        </div>
-    </section>
-
-    <!-- Holiday Message Board -->
-    <section class="message-board-section">
-        <div class="section-header">
-            <h2><i class="fas fa-comment-alt"></i> Winter Wishes</h2>
-            <p class="section-subtitle">Warm Greetings from Classmates</p>
-        </div>
-        
-        <div class="message-board">
-            <div class="message-display">
-                <p id="winterMessage">Click the button to receive a winter wish!</p>
-                <p class="message-author" id="messageAuthor"></p>
-            </div>
-            <button id="warmWishesBtn" class="warm-wishes-btn">
-                <i class="fas fa-fire"></i> Warm Wishes
-            </button>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <h3>MAKAKALIKASAN</h3>
-                <p>Winter Lights Memory Garden</p>
-                <div class="footer-snowflakes">
-                    <i class="fas fa-snowflake"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-snowflake"></i>
-                </div>
-            </div>
+        function createTwinklingStars() {
+            const container = document.getElementById('stars-container');
+            const starCount = 150;
             
-            <div class="footer-info">
-                <p> 2025 MAKAKALIKASAN</p>
-                <p>Made with <i class="fas fa-heart"></i> and winter magic</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scroll to Top Button -->
-    <button id="scrollToTop" class="scroll-to-top">
-        <i class="fas fa-snowflake"></i>
-    </button>
-
-    <!-- Night Mode Button -->
-    <button id="nightModeToggle" class="night-mode-btn" title="Night Mode">
-        <i class="fas fa-moon"></i>
-    </button>
-
-    <!-- Lantern Modal -->
-    <div id="lanternModal" class="modal">
-        <div class="modal-content lantern-modal">
-            <button class="close-modal" id="closeLanternModal">&times;</button>
-            <div class="modal-image-container">
-                <img id="lanternModalImage" src="" alt="Memory Image">
-                <div class="lantern-glow"></div>
-            </div>
-            <div class="modal-info">
-                <h3 id="lanternModalTitle">Memory</h3>
-                <p id="lanternModalDescription">A beautiful memory from our journey</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Gallery Modal -->
-    <div id="galleryModal" class="modal">
-        <div class="modal-content gallery-modal">
-            <button class="close-modal" id="closeGalleryModal">&times;</button>
-            <div class="modal-image-container">
-                <img id="galleryModalImage" src="" alt="Gallery Image">
-                <div class="frost-overlay-modal"></div>
-            </div>
-            <div class="modal-info">
-                <h3 id="galleryModalTitle">Gallery Image</h3>
-                <p id="galleryModalDescription">A frozen moment in time</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Classmate Modal -->
-    <div id="classmateModal" class="modal">
-        <div class="modal-content classmate-modal">
-            <button class="close-modal" id="closeClassmateModal">&times;</button>
-            <div class="modal-header">
-                <div class="classmate-photo-modal">
-                    <i class="fas fa-user-circle"></i>
-                    <div class="snowflake-bg-modal"></div>
-                </div>
-                <h2 id="classmateName">Classmate Name</h2>
-                <p id="classmateRole" class="classmate-role">Student</p>
-            </div>
-            <div class="modal-body">
-                <div class="winter-wish">
-                    <h3><i class="fas fa-gift"></i> Winter Wish</h3>
-                    <p id="winterWishText">Tap twice on a classmate's card to reveal their personalized winter wish!</p>
-                </div>
-                <div class="snowflake-pattern-modal"></div>
-            </div>
-        </div>
-    </div>
-    
-
-    <audio id="backgroundMusic" loop>
-        <source src="" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
-    <script src="script.js"></script>
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                const size = Math.random() * 3;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const opacity = Math.random() * 0.7 + 0.3;
+                const duration = Math.random() * 3 + 2;
+                const delay = Math.random() * 5;
+                
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${posX}%`;
+                star.style.top = `${posY}%`;
+                star.style.opacity = opacity;
+                star.style.animation = `twinkle ${duration}s infinite ${delay}s`;
+                
+                container.appendChild(star);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            createSpaceBackground();
+            createTwinklingStars();
+        });
+    </script>
 </body>
 </html>
-
